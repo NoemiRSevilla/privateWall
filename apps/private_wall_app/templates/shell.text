@@ -1,0 +1,13 @@
+     if len(postData['birthdate']) < 1:
+            errors["birthdate"] = "<div class='ohno'>Birthdate required</div>"
+        else:
+            birthdate = datetime.strptime(postData['birthdate'], "%Y-%m-%d")
+            present = datetime.now()
+            if ((present - birthdate).days/365 < 13):
+                errors['birthdate'] = "<div class='ohno'>You have to at least be 13 years old to register</div>"
+
+message_created_at = message_info.created_at
+present = datetime.now()
+FMT = "%Y-%m-%d"
+
+tdelta = datetime.strptime(message_created_at, FMT) - datetime.strptime(present, FMT)

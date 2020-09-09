@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Show</title>
+
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css.css' %}">
+    </head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+        <h4 class="white mr-auto">CodingDojo Wall</h4>
+        <h6 class="white name"> Welcome, {{user_info.first_name}}!</h6>
+        <a href="/logout" class="badge badge-primary">Log out</a>
+    </nav>
+    <br>
+    <div class="container">
+        <form action="/postmessage" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="message">
+                    <h4>Post a message:</h4>
+                </label>
+                <input type="text" class="form-control" name="message"
+                    placeholder="Post a message on Private Wall forum!">
+                <input type="hidden" name="user_id" value="{{user_info.id}}">
+            </div>
+            <button type="submit" class="btn btn-primary">Post a message</button>
+        </form>
+        <br>
+        {%for message_info in all_messages%}
+        <table class="margintoptwo table table-primary">
+            <th scope="col">{{message_info.user.first_name}} {{message_info.user.last_name}} {{message_info.created_at}}
+            </th>
+            <tbody>
+                <td class="color bg-light">
+                    <h6 class="d-inline">{{message_info.message}}</h6>
+                    {% if request.session.email == message_info.user.email %}
+                    <a href="/message/{{message_info.id}}/delete">
+                        <img border="0" alt="delete" src="{% static 'img/delete.png' %}" width="35" height="35">
+                    </a>
+    </div>
+    {%endif%}
+    </td>
+    </tbody>
+    </table>
+    <div class="container">
+        {%for comment in message_info.comments.all %}
+        <table class="margintoptwo table table-success">
+            <th scope="col">{{comment.user.first_name}} {{comment.user.last_name}} {{comment.created_at}}</th>
+            <tbody>
+                <td class="color bg-light">{{comment.comment}}</td>
+            </tbody>
+        </table>
+        {%endfor%}
+        <form action="/postcomment" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="message">Post a comment:</label>
+                <input type="text" class="form-control" name="comment"
+                    placeholder="Post a comment on to {{message_info.user.first_name}}'s message!">
+                <input type="hidden" name="user_id" value="{{user_info.id}}">
+                <input type="hidden" name="message_id" value="{{message_info.id}}">
+            </div>
+            <button type="submit" class="btn btn-success">Post a comment</button>
+        </form>
+        <br>
+    </div>
+    {%endfor%}
+    </div>
+</body>
+
+</html>

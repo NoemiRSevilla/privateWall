@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!-- saved from url=(0046)http://localhost:8000/resqpedia/add_recipe_get -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>add a recipe</title>
+
+    
+        <link rel="stylesheet" href="./add a recipe_files/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        
+        <link rel="stylesheet" href="./add a recipe_files/css.css">
+    </head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+        <h4 class="white mr-auto">Welcome, Leslie Knope</h4>
+        <a href="http://localhost:8000/logout" class="move badge badge-primary">Log out</a>
+    </nav>
+    <br>
+    
+    <div class="move col-3 form-group">
+    <h1>Add a recipe</h1>
+    
+    <form action="http://localhost:8000/resqpedia/add_recipe_post" method="POST">
+        <input type="hidden" name="csrfmiddlewaretoken" value="d34VZG4ncxK1MHqwfSRhmyuNBThi8X0fhClwTgaeOr1pp83maskSMyfUFBxjrYAz">
+        <input type="file" name="pic" accept="image/*">
+        <input type="submit">
+        <div class="form-group">
+            <label for="prep_time">Prep Time: </label>
+            <input type="number" class="form-control" name="prep_time">
+        </div>
+        <div class="form-group">
+        <label for="cook_time">Cook Time: </label>
+        <input type="number" class="form-control" name="cook_time">
+        </div>
+        <div class="form-group">
+            <label for="number_of_servings">Numer of Servings: </label>
+            <input type="number" class="form-control" name="number_of_servings">
+        </div>
+        <div class="form-group">
+            <label for="title">Title </label>
+            <textarea class="form-control" name="title" value="placeholder=&quot;Required&quot;" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="description">Description </label>
+            <textarea class="form-control" name="description" value="placeholder=&quot;Must" be="" more="" than="" 50="" characters"="" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="ingredients">Ingredients </label>
+            <textarea class="form-control" name="ingredients" value="placeholder=&quot;Ingredients" required"="" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="directions">Directions </label>
+            <textarea class="form-control" name="directions" value="placeholder=&quot;Ingredients" required"="" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="directions">Categories </label>
+            <textarea class="form-control" name="categories" value="placeholder=&quot;Categories" required"="" rows="3"></textarea>
+        </div>
+        <input type="hidden" name="recipe_uploaded_by" value="1">
+        <button type="submit" class="moveitright col-4 btn btn-success">Submit</button>
+    </form>
+
+</div></body></html>
